@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMONTANEZ RENCE P. ACTIVITY 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=TASA+Explorer:wght@400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="activity1AND2.css">
+  <style>
+    .gallery-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0 0 0;
+      gap: 12px;
+    }
+    .gallery-nav button {
+      background: #222;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .gallery-nav button:disabled {
+      background: #888;
+      cursor: not-allowed;
+    }
+    .dashboard-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .dashboard-link {
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .dashboard-link:hover {
+      background: #222;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- DASHBOARD NAVIGATION BAR -->
+  <nav class="dashboard" aria-label="Main Navigation">
+    <div class="dashboard-left">
+      <span class="dashboard-title">ANIME BUD</span>
+    </div>
+    <div class="dashboard-right">
+      <a href="Anime photo.html" class="dashboard-link">ANIME LIST</a>
+      <a href="#favorites-section" class="dashboard-link" id="favorites-link">MY FAVORITES</a>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="left-content">
+      <h1 id="dynamic-text" aria-live="polite"></h1>
+      <p style="text-align: justify;">
+        Hello, my name is Rence P. Samontañez, but you can just call me Rence. I’m 21 years old and I’m from Lipa City, Batangas.
+      </p>
+      <p style="text-align: justify;">
+        I spend much of my time either working hard to earn money or improving myself, because I believe that better people attract better opportunities. In my free time, I enjoy playing different online games, reading manhwa and manga, and watching anime. I also play basketball and volleyball casually—while I may not know all the fundamentals, I enjoy playing for fun and experience.<br><br>
+        Like many others, my dream used to be simply about getting rich, but as I’ve grown older, I realized it’s not just about the money. What matters most to me now are the experiences I gain along the way, because they teach valuable lessons and help me discover more about myself.
+      </p>
+    </div>
+    <div class="right-content">
+      <div class="photo-gallery">
+        <img src="BAROU.jpg" alt="Anime Photo">
+      </div>
+    </div>
+  </div>
+  <section class="gallery-section" id="favorites-section">
+    <h2>MY FAVORITE ANIME</h2>
+    <div class="custom-gallery-grid" id="custom-gallery-grid">
+      <!-- Gallery items will be rendered here -->
+    </div>
+    <div class="gallery-nav">
+      <button id="gallery-prev" aria-label="Previous" type="button">Back</button>
+      <span id="gallery-page-indicator" style="font-size:1rem;"></span>
+      <button id="gallery-next" aria-label="Next" type="button">Next</button>
+    </div>
+    <div style="text-align:center; margin-top:10px; color:#888; font-size:0.95em;">
+      <!-- Space for adding more anime: just add more objects in the galleryItems array in the script below -->
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-left">
+      STAND ALONE AS KING, I WOULD RATHER DIE THAN BE SOMEONES SLAVE - BAROU
+    </div>
+  </footer>
+  <script>
+    // Editable gallery data: add more objects as needed
+    const galleryItems = [
+      {
+        img: "jujutsu kaisen.jpg",
+        link: "https://en.wikipedia.org/wiki/Jujutsu_Kaisen",
+        caption: "Jujutsu Kaisen"
+      },
+      {
+        img: "demon slayer.jpg",
+        link: "https://en.wikipedia.org/wiki/Demon_Slayer:_Kimetsu_no_Yaiba",
+        caption: "Demon Slayer"
+      },
+      {
+        img: "one piece.jpg",
+        link: "https://en.wikipedia.org/wiki/One_Piece",
+        caption: "One Piece"
+      },
+      { 
+        img: "aot.jpg",
+        link: "https://en.wikipedia.org/wiki/Attack_on_Titan",
+        caption: "Attack on Titan"
+      },
+      {
+        img: "naruto.jpg",
+        link: "https://en.wikipedia.org/wiki/Naruto",
+        caption: "Naruto"
+      },
+      {
+        img: "dragon ball.jpg",
+        link: "https://en.wikipedia.org/wiki/Dragon_Ball",
+        caption: "Dragon Ball"
+      },
+      {
+        img: "bleach.jpg",
+        link: "https://en.wikipedia.org/wiki/Bleach_(manga)",
+        caption: "Bleach"
+      },
+      {
+        img: "tokyo ghoul.jpg",
+        link: "https://en.wikipedia.org/wiki/Tokyo_Ghoul",
+        caption: "Tokyo Ghoul"
+      },
+      {
+        img: "hunter x hunter.jpg",
+        link: "https://en.wikipedia.org/wiki/Hunter_%C3%97_Hunter",
+        caption: "Hunter x Hunter"
+      },
+      {
+        img: "fairy tail.jpg",
+        link: "https://en.wikipedia.org/wiki/Fairy_Tail",
+        caption: "Fairy Tail"
+      },
+      {
+        img: "fire force.jpg",
+        link: "https://en.wikipedia.org/wiki/Fire_Force",
+        caption: "Fire Force"
+      },
+      {
+        img: "mob psycho 100.jpg",
+        link: "https://en.wikipedia.org/wiki/Mob_Psycho_100",
+        caption: "Mob Psycho 100"
+      },
+    ];
+
+    let galleryStartIndex = 0;
+    const ITEMS_VISIBLE = 3;
+
+    function renderGalleryGrid() {
+      const gallery = document.getElementById('custom-gallery-grid');
+      gallery.innerHTML = '';
+      const endIdx = Math.min(galleryStartIndex + ITEMS_VISIBLE, galleryItems.length);
+      for (let i = galleryStartIndex; i < endIdx; i++) {
+        const item = galleryItems[i];
+        const a = document.createElement('a');
+        a.href = item.link;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        const img = document.createElement('img');
+        img.src = item.img;
+        img.alt = item.caption;
+        const caption = document.createElement('div');
+        caption.className = "caption";
+        caption.textContent = item.caption;
+        a.appendChild(img);
+        a.appendChild(caption);
+        gallery.appendChild(a);
+      }
+
+      // Update navigation buttons and page indicator
+      const prevBtn = document.getElementById('gallery-prev');
+      const nextBtn = document.getElementById('gallery-next');
+      const pageIndicator = document.getElementById('gallery-page-indicator');
+
+      prevBtn.disabled = galleryStartIndex === 0;
+      nextBtn.disabled = galleryStartIndex + ITEMS_VISIBLE >= galleryItems.length;
+
+      let from = galleryItems.length === 0 ? 0 : galleryStartIndex + 1;
+      let to = Math.min(galleryStartIndex + ITEMS_VISIBLE, galleryItems.length);
+      pageIndicator.textContent = `Showing ${from}-${to} of ${galleryItems.length}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderGalleryGrid();
+
+      document.getElementById('gallery-prev').addEventListener('click', () => {
+        if (galleryStartIndex > 0) {
+          galleryStartIndex--;
+          renderGalleryGrid();
+        }
+      });
+
+      document.getElementById('gallery-next').addEventListener('click', () => {
+        if (galleryStartIndex + ITEMS_VISIBLE < galleryItems.length) {
+          galleryStartIndex++;
+          renderGalleryGrid();
+        }
+      });
+
+      // Smooth scroll for "MY FAVORITES" link
+      const favoritesLink = document.getElementById('favorites-link');
+      if (favoritesLink) {
+        favoritesLink.addEventListener('click', function(e) {
+          const target = document.getElementById('favorites-section');
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+    });
+
+    window.addEventListener('resize', renderGalleryGrid);
+  </script>
+  <script>
+    // Typing effect logic
+    const textArray = [
+      "Hello I'm Rence :D ",
+      "THIS IS MY ACTIVITY 1",
+      "On my right is non other",
+      "Than BAROU "
+    ];
+    let arrayIndex = 0;
+    let charIndex = 0;
+    const typingSpeed = 100;
+    const erasingSpeed = 50;
+    const delayBetweenTexts = 2000;
+    const dynamicText = document.getElementById("dynamic-text");
+
+    function typeText() {
+      if (charIndex < textArray[arrayIndex].length) {
+        dynamicText.textContent += textArray[arrayIndex][charIndex];
+        charIndex++;
+        setTimeout(typeText, typingSpeed);
+      } else {
+        setTimeout(eraseText, delayBetweenTexts);
+      }
+    }
+
+    function eraseText() {
+      if (charIndex > 0) {
+        dynamicText.textContent = textArray[arrayIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(eraseText, erasingSpeed);
+      } else {
+        arrayIndex = (arrayIndex + 1) % textArray.length;
+        setTimeout(typeText, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      dynamicText.textContent = "";
+      typeText();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,882 @@
+
+
+:root {
+  --dashboard-height: 72px;
+  --dashboard-padding: 0 4vw;
+  --dashboard-title-size: 2.1rem;
+  --dashboard-link-size: 1.13rem;
+  --dashboard-link-padding: 8px 22px;
+  --dashboard-gap: 36px;
+  --main-gap: 64px;
+  --main-max-width: 1200px;
+  --main-padding: 0 3vw;
+  --dynamic-text-size: 2.7rem;
+  --dynamic-text-padding: 8px 18px;
+  --main-p-size: 1.18rem;
+  --main-p-padding: 10px 18px;
+  --main-p-max-width: 520px;
+  --gallery-section-max-width: 1200px;
+  --gallery-gap: 0px; /* No gap for grid images */
+  --gallery-img-width: 480px;
+  --gallery-img-height: 320px;
+  --gallery-caption-size: 1.18rem;
+  --photo-gallery-img-size: 320px;
+  --photo-gallery-img-size-mobile: 180px;
+  --gallery-btn-size: 80px;
+  --gallery-btn-font-size: 3.5em;
+  --gallery-img-large-width: 520px;
+  --gallery-img-large-height: 380px;
+  --gallery-caption-bg: rgba(0,0,0,0.85);
+}
+
+/* ===== GLOBAL BODY & HTML STYLES ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "TASA Explorer", sans-serif;
+  background: url('2.1.png') no-repeat center center;
+  background-size: cover;
+  color: #e0e0e0;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* ===== DASHBOARD NAVIGATION BAR STYLES ===== */
+/* Connected to: <nav class="dashboard"> */
+.dashboard {
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dashboard-padding);
+  height: var(--dashboard-height);
+  background: rgba(0, 0, 0, 0.88);
+  border-bottom: 2px solid #222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  gap: 0;
+}
+
+/* Connected to: <div class="dashboard-left"> */
+.dashboard-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Connected to: <span class="dashboard-title"> */
+.dashboard-title {
+  font-size: var(--dashboard-title-size);
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  background: linear-gradient(90deg, #ff0505 0%, #fefefe 50%, #fa0000 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: "TASA Explorer", sans-serif;
+  text-decoration: none;
+  padding: 0 14px;
+  user-select: none;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* Connected to: <div class="dashboard-center"> */
+.dashboard-center {
+  display: flex;
+  align-items: center;
+  gap: var(--dashboard-gap);
+  height: 100%;
+}
+
+/* Connected to: <a class="dashboard-link"> */
+.dashboard-link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: var(--dashboard-link-size);
+  font-weight: 600;
+  padding: var(--dashboard-link-padding);
+  border-radius: 7px;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  letter-spacing: 1.2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "TASA Explorer", sans-serif;
+  box-shadow: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard-link:hover, .dashboard-link.active {
+  background: linear-gradient(90deg, #5d0101 0%, #000000 50%, #5d0101 100%);
+  color: #ff0000;
+  box-shadow: 0 2px 12px #ff000033;
+}
+
+/* Connected to: <div class="dashboard-right"> */
+.dashboard-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Connected to: <form class="dashboard-search-bar"> */
+.dashboard-search-bar {
+  display: flex;
+  align-items: center;
+  background: #23243a;
+  border-radius: 20px;
+  padding: 4px 16px;
+  border: 1.5px solid #444;
+  transition: border-color 0.2s;
+  min-width: 180px;
+  box-shadow: 0 1px 6px #00000022;
+}
+.dashboard-search-bar:focus-within {
+  border-color: #ff0000;
+}
+
+/* Connected to: <input type="text"> inside dashboard-search-bar */
+.dashboard-search-bar input[type="text"] {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e0e0e0;
+  font-size: 1.08em;
+  padding: 7px 0 7px 6px;
+  width: 150px;
+  transition: width 0.2s;
+  font-family: "TASA Explorer", sans-serif;
+  letter-spacing: 0.5px;
+}
+.dashboard-search-bar input[type="text"]::placeholder {
+  color: #aaa;
+  opacity: 1;
+  font-size: 1em;
+}
+
+/* Connected to: <button> inside dashboard-search-bar */
+.dashboard-search-bar button {
+  background: none;
+  border: none;
+  color: #39ff14;
+  font-size: 1.3em;
+  cursor: pointer;
+  margin-left: 6px;
+  padding: 0;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+.dashboard-search-bar button:hover {
+  color: #ff00de;
+}
+
+/* ===== MAIN CONTENT AREA STYLES ===== */
+/* Connected to: <div class="main-container"> */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  min-height: calc(100vh - var(--dashboard-height));
+  width: 100vw;
+  max-width: var(--main-max-width);
+  margin: var(--dashboard-height) auto 0 auto;
+  box-sizing: border-box;
+  gap: var(--main-gap);
+  padding: var(--main-padding);
+}
+
+/* Connected to: <div class="left-content"> */
+.left-content {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  min-width: 0;
+  gap: 18px;
+  max-width: 50vw;
+}
+
+/* Connected to: <div class="right-content"> */
+.right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+  max-width: 50vw;
+}
+
+/* Connected to: <h1 id="dynamic-text"> */
+h1#dynamic-text {
+  background-image: linear-gradient(90deg, #904444 0%, #fefefe 50%, #904444 100%);
+  background-size: 200% 100%;
+  background-position: left;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--dynamic-text-size);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  padding: var(--dynamic-text-padding);
+  border-radius: 7px;
+  min-height: 2.7em;
+  letter-spacing: 1.2px;
+  text-align: right;
+  font-family: "TASA Explorer", sans-serif;
+  font-weight: 800;
+  box-shadow: 0 2px 16px #ff000022;
+  line-height: 1.2;
+  max-width: 100%;
+}
+
+/* Connected to: <p> paragraph in left-content */
+p {
+  font-size: var(--main-p-size);
+  margin: 0;
+  background-image: linear-gradient(90deg, #ffffff 0%, #f90303 50%, #fa0404 100%);
+  background-size: 200% 100%;
+  background-position: left;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding: var(--main-p-padding);
+  border-radius: 10px;
+  border-left: 5px solid #904444;
+  max-width: var(--main-p-max-width);
+  line-height: 1.55;
+  letter-spacing: 0.7px;
+  background-color: transparent;
+  font-family: "TASA Explorer", sans-serif;
+  font-weight: 500;
+  box-shadow: 0 1px 8px #ff000022;
+  text-align: right;
+  transition: 
+    background 0.25s,
+    box-shadow 0.25s,
+    border-color 0.25s,
+    color 0.25s,
+    filter 0.25s,
+    transform 0.18s;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  animation: pulse-active 1.2s infinite alternate;
+}
+p:hover, p:focus, p:active {
+  background-image: linear-gradient(90deg, #000000 0%, #ff3333 50%, #ff0000 100%);
+  box-shadow: 0 4px 24px #ff000099, 0 2px 12px #ff333355, 0 0 16px 4px #ff3333cc;
+  border-left: 7px solid #ff0000;
+  filter: brightness(1.18) drop-shadow(0 0 12px #ff0000cc);
+  color: #fff;
+  -webkit-text-fill-color: #fff;  
+  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  transform: scale(1.03) translateX(-4px);
+  outline: none;
+}
+p:active {
+  transform: scale(0.98) translateX(-2px);
+  box-shadow: 0 2px 8px #ff000099, 0 1px 4px #ff333355, 0 0 8px 2px #ff3333cc;
+  filter: brightness(1.05) drop-shadow(0 0 6px #ff0000cc);
+}
+
+/* Connected to: paragraph animation */
+@keyframes pulse-active {
+  0% {
+    box-shadow: 0 1px 8px #ff000022, 0 0 0 #ff333300;
+    border-left-color: #904444;
+    filter: brightness(1);
+  }
+  100% {
+    box-shadow: 0 2px 16px #ff333355, 0 0 12px 2px #ff333355;
+    border-left-color: #ff3333;
+    filter: brightness(1.08);
+  }
+}
+
+/* ===== PHOTO GALLERY STYLES ===== */
+/* Connected to: <div class="photo-gallery"> */
+.photo-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  width: 100%;
+}
+
+/* Connected to: <img> inside photo-gallery */
+.photo-gallery img {
+  width: var(--photo-gallery-img-size);
+  height: var(--photo-gallery-img-size);
+  max-width: 100%;
+  max-height: 380px;
+  min-width: 180px;
+  min-height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Remove black background */
+  background: transparent;
+  border: 6px solid #f40000;
+  box-shadow: 0 0 32px 8px #ff0000, 0 4px 24px rgba(0,0,0,0.25);
+  transition: box-shadow 0.3s, border-color 0.3s, transform 0.18s;
+  animation: glow-red 1.2s infinite alternate;
+  display: block;
+  margin: 0 auto;
+}
+.photo-gallery img:hover,
+.photo-gallery img:focus {
+  /* Remove blur, just scale up a bit more */
+  transform: scale(1.08);
+  box-shadow: 0 0 56px 18px #ff3333, 0 4px 32px rgba(0,0,0,0.28);
+  border-color: #ff3333;
+  /* No filter or blur */
+}
+
+/* Remove persistent hover/focus effect after click by not styling :active */
+.photo-gallery img:active {
+  /* Optionally, a slight shrink for click feedback */
+  transform: scale(0.98);
+  box-shadow: 0 0 32px 8px #ff0000, 0 4px 24px rgba(0,0,0,0.25);
+  border-color: #f40000;
+}
+
+/* Connected to: photo-gallery image animation */
+@keyframes glow-red {
+  0% {
+    box-shadow: 0 0 18px 3px #ff0000, 0 4px 24px rgba(0,0,0,0.25);
+    border-color: #f40000;
+  }
+  100% {
+    box-shadow: 0 0 36px 10px #ff3333, 0 4px 24px rgba(0,0,0,0.25);
+    border-color: #ff3333;
+  }
+}
+
+/* ===== ADVANCED GALLERY SECTION STYLES ===== */
+/* Connected to: <section class="gallery-section"> */
+.gallery-section {
+  margin: 64px auto 0 auto !important;
+  max-width: 900px !important;
+  width: 100vw !important;
+  box-sizing: border-box;
+  padding: 0 24px 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  background: linear-gradient(120deg, #181818 80%, #2a0000 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 48px 0 #00000033, 0 2px 16px #ff000033;
+  min-height: 540px;
+  position: relative;
+  overflow: visible;
+}
+
+.gallery-section h2 {
+  text-align: left;
+  margin: 32px 0 28px 0;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: linear-gradient(90deg, #ff0505 0%, #fefefe 50%, #fa0000 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: "TASA Explorer", sans-serif;
+  padding-left: 8px;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px #ff000055;
+}
+
+/* ===== ADVANCED PHOTO GRID GALLERY STYLES ===== */
+.custom-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 36px 28px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  justify-items: center;
+  align-items: stretch;
+  min-height: 420px;
+  transition: 
+    max-width 0.5s cubic-bezier(0.4,0,0.2,1),
+    opacity 0.5s cubic-bezier(0.4,0,0.2,1),
+    transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+
+.custom-gallery-grid a {
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 2px 12px #ff000033;
+  transition: 
+    transform 0.28s cubic-bezier(0.4,0,0.2,1), 
+    box-shadow 0.28s cubic-bezier(0.4,0,0.2,1),
+    background 0.22s;
+  background: #1a1a1a;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  margin: 0;
+  position: relative;
+  min-width: 0;
+  max-width: 340px;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+.custom-gallery-grid a:hover, .custom-gallery-grid a:focus {
+  transform: translateY(-8px) scale(1.045) rotate(-0.5deg);
+  box-shadow: 0 16px 64px #ff0000b0, 0 2px 16px #ff000055;
+  border: none;
+  z-index: 2;
+  background: linear-gradient(120deg, #1a1a1a 80%, #2a0000 100%);
+}
+
+/* Connected to: <img> inside custom-gallery-grid links */
+.custom-gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px 18px 0 0;
+  margin: 0;
+  border: none;
+  /* Remove black background */
+  background: transparent;
+  transition: 
+    filter 0.32s cubic-bezier(0.4,0,0.2,1),
+    transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  flex: 1 1 0;
+  box-shadow: 0 2px 16px #ff000033;
+}
+
+.custom-gallery-grid .caption,
+.custom-gallery-grid .gallery-caption-overlay {
+  color: #fff;
+  font-size: 1.18rem;
+  padding: 18px 14px 16px 14px;
+  background: linear-gradient(90deg, #ff0000 0%, #1a1a1a 100%);
+  font-family: "TASA Explorer", sans-serif;
+  letter-spacing: 1.1px;
+  font-weight: 700;
+  border-radius: 0 0 18px 18px;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 32px #00000033;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.38s cubic-bezier(0.4,0,0.2,1), transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  z-index: 3;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.98);
+}
+.custom-gallery-grid a:hover .caption,
+.custom-gallery-grid a:focus .caption,
+.custom-gallery-grid a:hover .gallery-caption-overlay,
+.custom-gallery-grid a:focus .gallery-caption-overlay {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transform: translateY(0) scale(1.02);
+  background: linear-gradient(90deg, #ff3333 0%, #1a1a1a 100%);
+  color: #fff;
+  text-shadow: 0 2px 8px #ff0000cc;
+}
+/* Remove blur and grayscale on hover/focus, just scale up */
+.custom-gallery-grid a:hover img,
+.custom-gallery-grid a:focus img {
+  filter: none;
+  transform: scale(1.08) rotate(-0.5deg);
+}
+
+/* ===== ADVANCED GALLERY PAGE TRANSITION ===== */
+.custom-gallery-grid,
+.custom-gallery-grid > * {
+  transition: 
+    opacity 0.55s cubic-bezier(0.4,0,0.2,1),
+    transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.custom-gallery-grid.gallery-fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(40px) scale(0.96) skewY(2deg);
+  filter: blur(2px) grayscale(0.2);
+  transition: 
+    opacity 0.55s cubic-bezier(0.4,0,0.2,1),
+    transform 0.55s cubic-bezier(0.4,0,0.2,1),
+    filter 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.custom-gallery-grid.gallery-fade-in {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1) skewY(0);
+  filter: none;
+}
+
+/* ===== ADVANCED GALLERY NAVIGATION BUTTONS ===== */
+.gallery-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 32px 0 0 0;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+.gallery-nav button {
+  background: linear-gradient(90deg, #ff0000 0%, #ff3333 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 32px;
+  font-size: 1.18rem;
+  font-weight: 700;
+  font-family: "TASA Explorer", sans-serif;
+  letter-spacing: 1.1px;
+  box-shadow: 0 2px 16px #ff000055, 0 1px 4px #00000022;
+  cursor: pointer;
+  outline: none;
+  transition: 
+    background 0.22s cubic-bezier(0.4,0,0.2,1),
+    transform 0.18s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.22s cubic-bezier(0.4,0,0.2,1);
+  min-width: 110px;
+  min-height: 48px;
+  margin: 0 4px;
+  position: relative;
+  overflow: hidden;
+}
+.gallery-nav button:active {
+  transform: scale(0.97);
+  background: linear-gradient(90deg, #c80000 0%, #ff3333 100%);
+  box-shadow: 0 1px 8px #ff000055;
+}
+.gallery-nav button:disabled {
+  background: #888;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+#gallery-page-indicator {
+  font-size: 1.1rem;
+  color: #ff3333;
+  font-weight: 700;
+  font-family: "TASA Explorer", sans-serif;
+  letter-spacing: 1.1px;
+  padding: 0 12px;
+  min-width: 60px;
+  text-align: center;
+  user-select: none;
+}
+
+/* ===== RESPONSIVE DESIGN STYLES ===== */
+@media (max-width: 1200px) {
+  .main-container {
+    max-width: 98vw;
+    gap: 32px;
+  }
+  .gallery-section {
+    max-width: 99vw !important;
+    padding: 0 8px 24px 8px;
+    border-radius: 16px;
+  }
+  .custom-gallery-grid {
+    max-width: 99vw;
+    gap: 18px 10px;
+    min-height: 260px;
+  }
+  .custom-gallery-grid a {
+    max-width: 260px;
+    border-radius: 12px;
+  }
+  .custom-gallery-grid img {
+    height: 140px;
+    border-radius: 12px 12px 0 0;
+  }
+  .custom-gallery-grid .caption,
+  .custom-gallery-grid .gallery-caption-overlay {
+    border-radius: 0 0 12px 12px;
+    font-size: 1rem;
+    padding: 10px 6px;
+  }
+  .gallery-section h2 {
+    font-size: 1.5rem;
+    margin: 24px 0 18px 0;
+    padding-left: 4px;
+  }
+  .gallery-nav button {
+    font-size: 1rem;
+    min-width: 80px;
+    min-height: 38px;
+    padding: 8px 18px;
+  }
+  #gallery-page-indicator {
+    font-size: 1rem;
+    min-width: 40px;
+    padding: 0 6px;
+  }
+}
+/* Even smaller screens */
+@media (max-width: 700px) {
+  .custom-gallery-grid {
+    gap: 10px;
+  }
+  .custom-gallery-grid a {
+    max-width: 98vw;
+    width: 98vw;
+    border-radius: 10px;
+  }
+  .custom-gallery-grid img {
+    height: 120px;
+    border-radius: 10px 10px 0 0;
+  }
+  .custom-gallery-grid .caption {
+    border-radius: 0 0 10px 10px;
+    font-size: 1rem;
+    padding: 10px 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --dashboard-height: 90px;
+    --dashboard-title-size: 1.5rem;
+    --main-gap: 24px;
+    --dynamic-text-size: 1.5rem;
+    --main-p-size: 1rem;
+    --main-p-max-width: 95vw;
+    --gallery-section-max-width: 99vw;
+    --gallery-gap: 0px;
+    --gallery-img-width: 200px;
+    --gallery-img-height: 120px;
+    --photo-gallery-img-size-mobile: 120px;
+    --gallery-btn-size: 44px;
+    --gallery-btn-font-size: 1.7em;
+  }
+  .dashboard {
+    flex-direction: column;
+    height: auto;
+    padding: 10px 2vw;
+    gap: 10px;
+  }
+  .dashboard-center {
+    gap: 10px;
+  }
+  .main-container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: auto;
+    margin-top: var(--dashboard-height);
+    gap: 18px;
+    padding: 0 2vw;
+  }
+  .left-content, .right-content {
+    align-items: center !important;
+    width: 100%;
+    max-width: 100vw;
+    text-align: center;
+  }
+  h1#dynamic-text, p {
+    text-align: center !important;
+  }
+  .photo-gallery img {
+    width: var(--photo-gallery-img-size-mobile);
+    height: var(--photo-gallery-img-size-mobile);
+    min-width: 90px;
+    min-height: 90px;
+    max-width: 180px;
+    max-height: 180px;
+  }
+  .custom-gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    max-width: 99vw;
+  }
+  .custom-gallery-grid img {
+    height: 70px;
+  }
+  .custom-gallery-grid .caption {
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --dashboard-title-size: 1.1rem;
+    --dynamic-text-size: 1.1rem;
+    --main-p-size: 0.95rem;
+    --gallery-caption-size: 0.95rem;
+  }
+  .main-container {
+    padding: 0 1vw;
+  }
+  .gallery-section {
+    padding: 0 1vw;
+  }
+  .dashboard {
+    flex-direction: column;
+    height: auto;
+    padding: 8px 1vw;
+    gap: 8px;
+  }
+  .dashboard-center {
+    gap: 6px;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 1vw 8px 1vw;
+  }
+  .footer-right {
+    gap: 10px;
+  }
+  .footer-left {
+    font-size: 0.9rem;
+    max-width: 98vw;
+  }
+  .custom-gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    max-width: 100vw;
+  }
+  .custom-gallery-grid img {
+    height: 50px;
+  }
+}
+@media (max-width: 400px) {
+  .dashboard-title {
+    font-size: 0.9rem;
+    padding: 0 6px;
+  }
+  .footer-left {
+    font-size: 0.8rem;
+  }
+  .gallery-section h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* ===== FOOTER STYLES ===== */
+/* Connected to: <footer class="footer"> */
+.footer {
+  width: 100vw;
+  background: rgba(0,0,0,0.92);
+  border-top: 2px solid #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 4vw 18px 4vw;
+  margin-top: 64px;
+  box-sizing: border-box;
+  font-family: "TASA Explorer", sans-serif;
+  position: relative;
+  z-index: 10;
+}
+
+/* Connected to: <div class="footer-left"> */
+.footer-left {
+  max-width: 600px;
+  font-size: 1.08rem;
+  color: #e0e0e0;
+  background-image: linear-gradient(90deg, #ffffff 0%, #f90303 50%, #fa0404 100%);
+  background-size: 200% 100%;
+  background-position: left;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  padding: 0 0 0 8px;
+  border-left: 5px solid #904444;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 1px 8px #ff000022;
+  line-height: 1.5;
+}
+
+/* Connected to: <div class="footer-right"> */
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Connected to: <a class="footer-icon"> */
+.footer-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #181818;
+  box-shadow: 0 2px 8px #ff000022;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.15s;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6em;
+  margin-left: 0;
+  margin-right: 0;
+}
+.footer-icon:hover, .footer-icon:focus {
+  background: linear-gradient(135deg, #ff3333 0%, #b00000 100%);
+  color: #fff;
+  box-shadow: 0 4px 16px #ff0000a0;
+  transform: scale(1.12);
+}
+
+/* Connected to: Footer responsive design */
+@media (max-width: 700px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    padding: 18px 2vw 12px 2vw;
+  }
+  .footer-right {
+    gap: 16px;
+  }
+  .footer-left {
+    font-size: 0.98rem;
+    max-width: 98vw;
+  }
+}
